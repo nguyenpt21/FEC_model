@@ -9,7 +9,7 @@ def vi_tokenize(text):
         return ""
     return word_tokenize(text.lower().strip(), format="text")
     
-def load_data(filename, tokenize_vi=True):
+def load_data(filename, tokenize_vi=True, source_column="Statement", target_column="Mutated", generated_column="generated_text"):
     sources = []
     predictions = []
     references = []
@@ -17,10 +17,9 @@ def load_data(filename, tokenize_vi=True):
     with open(filename, mode='r', encoding='utf-8') as fr:
         reader = csv.DictReader(fr)
         for data_instance in reader:
-            src = data_instance['Statement']
-            tgt = data_instance['Mutated']
-            gen = data_instance['mutated']
-
+            src = data_instance[source_column]
+            tgt = data_instance[target_column]
+            gen = data_instance[generated_column]
 
             if isinstance(gen, list):
                 gen = gen[0]

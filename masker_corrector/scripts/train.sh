@@ -2,8 +2,8 @@ DATA_DIR=./masker_corrector/data
 INIT_MODEL=${1:-VietAI/vit5-base}
 export PYTHONPATH=$(pwd)
 
-python .masker_corrector/main.py  \
-    --initialization 
+python masker_corrector/main.py  \
+    --initialization $INIT_MODEL \
     --train_file $DATA_DIR/train.csv \
     --validation_file $DATA_DIR/dev.csv \
     --max_src_len 256 --max_tgt_len 256 \

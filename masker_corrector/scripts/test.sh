@@ -3,7 +3,7 @@ MODEL_PATH=$1
 
 export PYTHONPATH=$(pwd)
 
-python masker_corrector.py  \
+python masker_corrector/main.py  \
     --test_file $DATA_DIR/test.csv \
     --do_predict \
     --model_path $MODEL_PATH --resume \

@@ -5,8 +5,8 @@ import sys
 import json
 import logging
 from helper import *
-from dataset import *
-from evaluate import *
+from .dataset import *
+from .evaluate import *
 from tqdm import tqdm
 # try:
 #     from torch.utils.tensorboard import SummaryWriter

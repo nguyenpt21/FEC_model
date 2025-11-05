@@ -3,9 +3,9 @@ from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 from transformers import  get_linear_schedule_with_warmup
 import json
 import logging
+from .evaluate import evaluate_dev
 from .helper import get_optimizer
 from .dataset import Seq2SeqDataset
-from .evaluate import evaluate_dev
 from tqdm import tqdm
 # try:
 #     from torch.utils.tensorboard import SummaryWriter
@@ -13,8 +13,8 @@ from tqdm import tqdm
 from tensorboardX import SummaryWriter
 
 
-# logger = logging.getLogger(__name__)
 logger = logging.getLogger("__main__")
+
 
 def train(model, tokenizer, args):
     """ Train the model """

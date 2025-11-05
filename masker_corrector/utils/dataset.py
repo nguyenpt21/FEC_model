@@ -4,6 +4,7 @@ from torch.nn.utils.rnn import pad_sequence
 import random
 import math
 import csv
+import ast
 from underthesea import word_tokenize
 
 
@@ -76,7 +77,8 @@ class Seq2SeqDataset(Dataset):
                     if self.use_gold_evidence:
                         evidence = instance[self.gold_evidence_column]
                     else: 
-                        collected_evidence = instance[self.retrieved_evidence_column][:self.num_evidence]
+                        retrieved = ast.literal_eval(instance[self.retrieved_evidence_column])
+                        collected_evidence = retrieved[:self.num_evidence]
                         evidence = " ".join(collected_evidence)
                 else:
                     evidence = None

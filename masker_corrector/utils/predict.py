@@ -4,9 +4,7 @@ from tqdm import tqdm
 import csv
 import os
 
-
 from .dataset import Seq2SeqDataset
-
 
 def generate(model, tokenizer, test_dataloader, args):
     """
@@ -31,7 +29,7 @@ def generate(model, tokenizer, test_dataloader, args):
         prefix += f'_tp_{args.temperature}'
     model.eval()
     
-    output_filename = os.path.join(args.output_dir, prefix + ".txt")
+    output_filename = os.path.join(args.output_dir, prefix + ".csv")
    
     with open(output_filename, 'w', encoding='utf-8', newline='') as fw:
         writer = None

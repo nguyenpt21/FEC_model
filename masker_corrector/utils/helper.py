@@ -2,17 +2,14 @@ import torch
 from torch.optim import AdamW
 from transformers import  AutoModelForSeq2SeqLM, AutoTokenizer
 import os
-import sys
 import argparse
 import random
 import logging
 import numpy as np
 
-sys.path.append('../')
 
 logger = logging.getLogger("__main__")
 
-sys.path.append('../')
 
 def str2bool(v):
     if isinstance(v, bool):

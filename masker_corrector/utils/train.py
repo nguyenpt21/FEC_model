@@ -1,10 +1,9 @@
 import torch
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 from transformers import  get_linear_schedule_with_warmup
-import sys
 import json
 import logging
-from helper import *
+from .helper import *
 from .dataset import *
 from .evaluate import *
 from tqdm import tqdm
@@ -12,7 +11,7 @@ from tqdm import tqdm
 #     from torch.utils.tensorboard import SummaryWriter
 # except ImportError:
 from tensorboardX import SummaryWriter
-sys.path.append('../')
+
 
 # logger = logging.getLogger(__name__)
 logger = logging.getLogger("__main__")

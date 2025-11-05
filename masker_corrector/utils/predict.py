@@ -1,11 +1,9 @@
 import torch
 from torch.utils.data import DataLoader, SequentialSampler
-import sys
 from tqdm import tqdm
 import csv
 import os
 
-sys.path.append('../')
 
 from .dataset import Seq2SeqDataset
 

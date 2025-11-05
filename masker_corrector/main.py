@@ -7,7 +7,6 @@ from utils.predict import predict
 from utils.train import train
 from utils.helper import load_model, set_env, str2bool
 
-sys.path.append('../')
 
 logger = logging.getLogger("__main__")
 

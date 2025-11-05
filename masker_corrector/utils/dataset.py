@@ -1,13 +1,11 @@
 import torch
 from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
-import sys
 import random
 import math
 import csv
 from underthesea import word_tokenize
-import numpy as np
-sys.path.append('../')
+
 
 class Seq2SeqDataset(Dataset):
     """

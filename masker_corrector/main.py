@@ -1,4 +1,3 @@
-import sys
 import argparse
 import logging
 
@@ -70,6 +69,9 @@ def get_parameter():
     parser.add_argument('--max_tgt_len', type=int, default=256, help='the max length of the tgt text.')
 
     parser.add_argument('--use_evidence', type=str2bool, default=True, help='whether use evidences to revise the original claim.')
+    parser.add_argument('--use_gold_evidence', type=str2bool, default=True, help='whether use gold evidences to revise the original claim.')
+    parser.add_argument('--num_evidence', type=int, default=3,
+                        help='the number of evidences used to revise the original claim.')
     parser.add_argument('--mask_ratio', type=float, default=0.15, help='The mask ratio for the source claim.')
     parser.add_argument('--mask_strategy', type=str, default='random', choices=['random', 'heuristic'], help='The mask strategy for the source claim.')
     parser.add_argument('--merge_mask', type=str2bool, default=False, help='whether use one mask token to denote multiple masked tokens.')

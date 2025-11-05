@@ -13,9 +13,11 @@ class Seq2SeqDataset(Dataset):
     """
 
     def __init__(self, filename, tokenizer, max_src_len=None, max_tgt_len=None, 
-                 use_evidence=False,  
+                 use_evidence=True, use_gold_evidence = True, num_evidence=3,
                  source_prefix = None, dataset_percent = 1.0, num_data_instance = -1,
-                 inference=False, start_idx = None, end_idx = None, 
+                 inference=False, start_idx = None, end_idx = None,
+                 ignore_label = 2, gold_evidence_column = "Evidence", retrieved_evidence_column = "retrieved_evidence_list", 
+                 claim_column = "Statement", label_column = "labels",
                  mask_ratio=0.15, mask_strategy='random', merge_mask=False, initialization='VietAI/vit5-base'):
         """
         Args:
@@ -47,32 +49,42 @@ class Seq2SeqDataset(Dataset):
         self.mask_strategy = mask_strategy
         self.merge_mask = merge_mask
         self.initialization = initialization
+        self.use_gold_evidence = use_gold_evidence
+        self.num_evidence = num_evidence
+        self.gold_evidence_column = gold_evidence_column
+        self.retrieved_evidence_column = retrieved_evidence_column
+        self.claim_column = claim_column
+        self.label_column = label_column
+        self.ignore_label = ignore_label
 
         print(f'Load source data from {self.filename}.')
         self.data_list = []
         selected_label = 0
-        not_selected_label = 2
         
         with open(filename, mode='r', encoding='utf-8') as fr:
             reader = csv.DictReader(fr)
             for instance in reader:
                 
                 if not self.inference:
-                    if int(instance["labels"]) != selected_label:
+                    if int(instance[self.label_column]) != selected_label:
                         continue
 
                 if self.inference:
-                    if int(instance["labels"]) == not_selected_label:
+                    if int(instance[self.label_column]) == self.ignore_label:
                         continue
                 if self.use_evidence:
-                    evidence = instance["Evidence"]
+                    if self.use_gold_evidence:
+                        evidence = instance[self.gold_evidence_column]
+                    else: 
+                        collected_evidence = instance[self.retrieved_evidence_column][:self.num_evidence]
+                        evidence = " ".join(collected_evidence)
                 else:
                     evidence = None
                 data_instance = {
-                    "src": instance["Statement"],
-                    "tgt": instance["Statement"],
+                    "src": instance[self.claim_column],
+                    "tgt": instance[self.claim_column],
                     "evidence": evidence,
-                    "labels": instance["labels"],
+                    "labels": instance[self.label_column],
                 }
                 
                 if self.inference:

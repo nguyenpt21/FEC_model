@@ -80,6 +80,7 @@ def predict(model, tokenizer, args):
                                     max_src_len=args.max_src_len, max_tgt_len=args.max_tgt_len,
                                     use_evidence=args.use_evidence, source_prefix = args.source_prefix, 
                                     inference=True, start_idx=start_idx, end_idx=end_idx,
+                                    use_gold_evidence=args.use_gold_evidence, num_evidence=args.num_evidence,
                                     mask_ratio=args.mask_ratio, mask_strategy=args.mask_strategy,merge_mask=args.merge_mask,initialization=args.initialization)
     
     test_sampler = SequentialSampler(test_dataset)
